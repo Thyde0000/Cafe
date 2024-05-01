@@ -1,0 +1,29 @@
+Model: classes*=Class;
+
+Class: 'clase' name=ID '{' members*=Member '}';
+
+Member: Method | InnerClass;
+
+Method: 'clase' visibility=Visibility returnType=ReturnType? 'principal' name=ID '(' parameters*=Parameter ')' '{' body*=Statement '}';
+
+InnerClass: 'clase' visibility=Visibility name=ID '{' members*=Member '}';
+
+Visibility: 'publica' | 'privada';
+
+ReturnType: 'vacia' | type=ID;
+
+Parameter: type=ID name=ID;
+
+Statement: PrintStatement | PrintVariable | AssignmentStatement;
+
+PrintStatement: 'dime' '(' expression=Expression ')' ';';
+
+AssignmentStatement: variable=ID '=' expression=Expression ';';
+
+PrintVariable: 'dime' expression=Expression ';';
+
+Expression: STRING | ID | INTEGER;
+
+STRING: /"(?:[^"\\]|\\.)*"/;
+ID: /[a-zA-Z]\w*/;
+INTEGER: /\d+/;
